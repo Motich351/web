@@ -1,23 +1,16 @@
 import sqlalchemy.ext.declarative as dec
 import sqlalchemy as sa
 import sqlalchemy.orm as orm
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
+from config import DATABASE_PATH
 
-__factory = None
+
 Base = dec.declarative_base()
+engine = create_engine(f"sqlite:///{DATABASE_PATH}")
+session_factory = sessionmaker(bind=engine,
+                               expire_on_commit=False)
 
 
-def global_init(db_file):
-    global __factory
-    if __factory:
-        return
-    if not db_file:
-        raise AttributeError("nenenenen")
-    connection_string = f'sqlite:///{db_file}'
-    print(f"podkluchenie k bd:{connection_string}")
-
-    engine = sa.create_engine(connection_string, echo=True)
-    __factory = orm.sessionmaker(engine)
-
-
-def create_session():
-    return __factory()
+def get_session() -> Session:
+    return session_factory()
