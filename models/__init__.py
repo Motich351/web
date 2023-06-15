@@ -1,2 +1,4 @@
 from .worker import WorkerOut, WorkerIn
-#from .worker import ShopsOut, ShopIn   #раскомментируй
+from .shop import ShopOut, ShopIn
+from .product import ProductOut, ProductIn
+from .shop_product import ShopProductIn, ShopProductOut
