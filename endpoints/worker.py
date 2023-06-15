@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from models import WorkerIn, WorkersOut
+from models import WorkerIn, WorkerOut
 from database import get_session, Worker
-from models.worker import WorkerOut
+from models.worker import WorkersOut
 
 router = APIRouter(prefix="/worker", tags=["worker"])
 
